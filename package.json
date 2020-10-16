@@ -1,0 +1,18 @@
+{
+  "name": "aem-site-template-builder",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT License, Copyright 2020 Adobe Systems Incorporated",
+  "main": "bin/index.js",
+  "bin": {
+    "aem-site-template-builder": "./bin/index.js"
+  },
+  "scripts": {},
+  "dependencies": {
+    "bestzip": "^2.1.6",
+    "colors": "^1.4.0",
+    "shelljs": "^0.8.4",
+    "yargs": "^16.1.0"
+  }
+}
