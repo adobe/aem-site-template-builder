@@ -1,10 +1,20 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
+const path = require('path');
 const yargs = require('yargs/yargs');
 const shell = require('shelljs');
+const clientlib = require("aem-clientlib-generator");
 
 const terminal = require('../lib/terminal');
 const PATHS = require('../lib/config').paths;
+const clientlibConfig = require(path.join(process.cwd(), 'clientlib.config.js'));
+
+if(clientlibConfig) {
+  clientlibConfig.libs.map(config => {
+    if(!config.path) config.path = clientlibConfig.clientLibRoot;
+  })
+}
 
 /* Future command line arguments:
 - config - path to config file which describes following arguments (default: none)
@@ -27,7 +37,11 @@ shell.exec('npm install');
 shell.exec('npm run prod');
 shell.cd('..');
 
-// Copy theme into content package - TODO
+// Create clientlibs
+shell.echo(terminal.prefix, 'Creating clientlibs...');
+clientlib(clientlibConfig.libs, { verbose: true }, function () {
+  shell.echo(terminal.prefix, 'Clientlibs properly generated!');
+});
 
 // Build content package
 shell.echo(terminal.prefix, 'Building content package...');

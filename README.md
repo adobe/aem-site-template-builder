@@ -49,9 +49,10 @@ into final `.zip` package (site-template.zip).
 
 AEM Site Template Builder will:
 1. Compile theme.
-2. Copy theme into content package.
-3. Build content package.
-4. Prepare Site Template structure.
-5. Zip theme sources.
-6. Copy all dependencies.
-6. Zip Site Template package.
+2. Generate clientlibs.
+3. Copy theme into content package.
+4. Build content package.
+5. Prepare Site Template structure.
+6. Zip theme sources.
+7. Copy all dependencies.
+8. Zip Site Template package.
