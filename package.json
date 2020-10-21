@@ -10,7 +10,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "aem-clientlib-generator": "^1.4.3",
     "bestzip": "^2.1.6",
     "colors": "^1.4.0",
     "shelljs": "^0.8.4",

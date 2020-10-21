@@ -13,7 +13,7 @@ In order to run AEM Site Template Builder you need to have installed on your mac
 
 Additionally you need to have access to sources of one of the `AEM Site Templates`.
 
-### Installation
+## Installation
 
 ```
 npm install [-g] @adobe/aem-site-template-builder
@@ -49,10 +49,9 @@ into final `.zip` package (site-template.zip).
 
 AEM Site Template Builder will:
 1. Compile theme.
-2. Generate clientlibs.
-3. Copy theme into content package.
-4. Build content package.
-5. Prepare Site Template structure.
-6. Zip theme sources.
-7. Copy all dependencies.
-8. Zip Site Template package.
+2. Copy theme into content package.
+3. Build content package.
+4. Prepare Site Template structure.
+5. Zip theme sources.
+6. Copy all dependencies.
+7. Zip Site Template package.
