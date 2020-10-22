@@ -67,3 +67,9 @@ For development purposes you can build local npm package which will provide `aem
 3. `npm link`
 
 Now you should have `aem-site-template-builder` command available globally as a command line. All changes that you will provide for the `aem-site-template-builder` script sources will get automatically applied to the linked command.
+
+## Contributing
+Contributions are welcomed! Read the [Contributing Guide](https://git.corp.adobe.com/ref-squad/aem-site-template-builder/blob/master/CONTRIBUTING.md) for more information.
+
+## Licensing
+This project is licensed under the MIT License. See [LICENSE](https://git.corp.adobe.com/ref-squad/aem-site-template-builder/blob/master/LICENSE.md) for more information.
