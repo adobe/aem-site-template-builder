@@ -68,7 +68,12 @@ For development purposes you can build local npm package which will provide `aem
 
 Now you should have `aem-site-template-builder` command available globally as a command line. All changes that you will provide for the `aem-site-template-builder` script sources will get automatically applied to the linked command.
 
+## Release and publish
+
+Run the "Release and publish" GitHub workflow and provide the semantic version you're about to release.
+
 ## Contributing
+
 Contributions are welcomed! Read the [Contributing Guide](.github/CONTRIBUTING.md) for more information.
 
 ## Licensing
