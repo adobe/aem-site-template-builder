@@ -68,13 +68,9 @@ For development purposes you can build local npm package which will provide `aem
 
 Now you should have `aem-site-template-builder` command available globally as a command line. All changes that you will provide for the `aem-site-template-builder` script sources will get automatically applied to the linked command.
 
-## Publish
+## Release and publish
 
-The package publishes to NPM registry automatically on push to main branch. Based on the commit messages, the version will be incremented from the lastest release. It respects the following rules:
-
-* If the string "BREAKING CHANGE" is found anywhere in any of the commit messages or descriptions the major version will be incremented.
-* If a commit message begins with the string "feat" then the minor version will be increased. This works for most common commit metadata for feature additions: "feat: new API" and "feature: new API".
-* All other changes will increment the patch version.
+Run the "Release and publish" GitHub workflow and provide the semantic version you're about to release.
 
 ## Contributing
 

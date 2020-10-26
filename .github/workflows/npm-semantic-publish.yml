@@ -1,17 +1,39 @@
-name: Publish semantic version to npm
+name: Release and publish to npm
 
-on:
-  push:
-    branches:
-      - main
+on: 
+  workflow_dispatch:
+    inputs:
+      semantic_version:
+        description: 'Semantic release version (major | minor | patch)'
+        required: true
+        default: 'patch'
 
 jobs:
-  publish:
-    name: Publish to npm
+  release_and_deploy:
+    name: Release and publish
     runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main'
+
     steps:
-    - name: Publish
-      uses: mikeal/merge-release@master
+    - uses: actions/checkout@v2
+
+    - name: Bump version and commit
+      run: |
+        git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+        git config --local user.name "Release action on behalf of ${{ github.actor }}"
+        npm version ${{ github.event.inputs.semantic_version }} -m 'Release %s'
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        tags: true
+
+    - name: Publish if version has been updated
+      uses: mkiki/npm-publish-action@c4315ef5790b7bcec2cbb75b34e37681a409d78d
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_AUTH_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
+        NPM_AUTH: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
