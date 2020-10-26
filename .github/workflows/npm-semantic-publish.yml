@@ -32,13 +32,9 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
-        tags: false # npm-publish-action takes care of it
+        tags: true
 
-    - name: Publish if version has been updated
-      uses: mkiki/npm-publish-action@c4315ef5790b7bcec2cbb75b34e37681a409d78d
-      with:
-        workspace: "."
+    - name: Publish
+      run: npm publish --access public
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_AUTH_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
-        NPM_AUTH: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
