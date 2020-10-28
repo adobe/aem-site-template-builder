@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       semantic_version:
-        description: 'Semantic release version (major | minor | patch)'
+        description: 'Semantic version (major | minor | patch)'
         required: true
         default: 'patch'
 
