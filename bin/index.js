@@ -9,9 +9,7 @@ accordance with the terms of the Adobe license agreement accompanying
 it.
 */
 
-const fs = require('fs');
 const path = require('path');
-const yargs = require('yargs/yargs');
 const shell = require('shelljs');
 const zip = require('bestzip');
 const colors = require('colors/safe');
