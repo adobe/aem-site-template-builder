@@ -21,6 +21,10 @@ jobs:
       with:
         node-version: '12'
 
+    - name: Run tests
+      run: |
+        npm test
+
     - name: Bump version and commit
       run: |
         git config --local user.email "${{ github.actor }}@users.noreply.github.com"

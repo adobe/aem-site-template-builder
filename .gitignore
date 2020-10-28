@@ -3,3 +3,9 @@ node_modules
 
 # Mac OS #
 .DS_Store
+
+# resources created during test run
+test/resources/some-site-template/site-template
+test/resources/some-site-template/site.template/target
+test/resources/some-site-template/site-template.zip
+test/resources/some-site-template/site.theme/package-lock.json

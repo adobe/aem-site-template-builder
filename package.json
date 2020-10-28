@@ -8,10 +8,15 @@
   "bin": {
     "aem-site-template-builder": "./bin/index.js"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "ava"
+  },
   "dependencies": {
     "bestzip": "2.1.7",
     "colors": "1.4.0",
     "shelljs": "0.8.4"
+  },
+  "devDependencies": {
+    "ava": "3.13.0"
   }
 }

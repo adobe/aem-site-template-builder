@@ -6,7 +6,7 @@ This repository contains scripts for building `AEM Site Templates`.
 
 Required dependencies: `node`, `mvn`, `git`, `zip`
 
-```
+```bash
 cd your-aem-site-template
 npm install @adobe/aem-site-template-builder --save-dev
 ```
@@ -15,14 +15,14 @@ npm install @adobe/aem-site-template-builder --save-dev
 
 To build your `AEM Site Template` just go into its folder and run command:
 
-```
+```bash
 npx aem-site-template-builder
 ls -l site-template.zip # done
 ```
 
 ## Expected structure of the repository
 
-```
+```bash
 files/                  Optional, folder with the UI kit XD file and possibly other files.
     design.xd
 previews/               Folder with screenshots of the site template.
@@ -46,7 +46,7 @@ package.json            Includes meta informations.
 
 ## Compiled site-template.zip
 
-```
+```bash
 files/                  Optional, folder with the UI kit XD file and possibly other files.
     design.xd
 previews/               Folder with screenshots of the site template.

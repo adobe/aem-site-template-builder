@@ -1,0 +1,11 @@
+{
+    "name": "some-site-template",
+    "version": "1.0.0",
+    "description": "Some Site Template",
+    "private": true,
+    "license": "MIT License",
+    "devDependencies": {
+      "@adobe/aem-site-template-builder": "0.1.4"
+    }
+  }
+  
