@@ -10,9 +10,9 @@
   },
   "scripts": {},
   "dependencies": {
-    "bestzip": "^2.1.6",
-    "colors": "^1.4.0",
-    "shelljs": "^0.8.4",
-    "yargs": "^16.1.0"
+    "bestzip": "2.1.6",
+    "colors": "1.4.0",
+    "shelljs": "0.8.4",
+    "yargs": "16.1.0"
   }
 }
