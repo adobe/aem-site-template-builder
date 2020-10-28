@@ -20,11 +20,12 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
+    
+    - name: Install dependencies
       run: npm install
 
     - name: Run tests
-      run: |
-        npm test
+      run: npm test
 
     - name: Bump version and commit
       run: |
