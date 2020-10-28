@@ -23,11 +23,7 @@ jobs:
 
     - name: Bump version and commit
       run: |
-        git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-        git config --local user.name "Release action on behalf of ${{ github.actor }}"
         npm version ${{ github.event.inputs.semantic_version }} -m 'Release %s'
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
 
     - name: Push changes
       uses: ad-m/github-push-action@master
