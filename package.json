@@ -9,7 +9,7 @@
     "aem-site-template-builder": "./bin/index.js"
   },
   "scripts": {
-    "test": "ava"
+    "test": "ava --serial=true"
   },
   "dependencies": {
     "bestzip": "2.1.7",
