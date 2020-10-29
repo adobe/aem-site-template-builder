@@ -7,5 +7,5 @@ node_modules
 # resources created during test run
 test/resources/some-site-template/site-template
 test/resources/some-site-template/site.template/target
-test/resources/some-site-template/site-template.zip
+test/resources/some-site-template/some-site-template-1.0.0.zip
 test/resources/some-site-template/site.theme/package-lock.json
