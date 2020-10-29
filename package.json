@@ -9,7 +9,7 @@
     "aem-site-template-builder": "./bin/index.js"
   },
   "scripts": {
-    "test": "ava --serial=true"
+    "test": "nyc ava --serial=true"
   },
   "dependencies": {
     "bestzip": "2.1.7",
@@ -17,6 +17,7 @@
     "shelljs": "0.8.4"
   },
   "devDependencies": {
-    "ava": "3.13.0"
+    "ava": "3.13.0",
+    "nyc": "15.1.0"
   }
 }

@@ -5,6 +5,7 @@ node_modules
 .DS_Store
 
 # resources created during test run
+.nyc_output
 test/resources/some-site-template/site-template
 test/resources/some-site-template/site.template/target
 test/resources/some-site-template/some-site-template-1.0.0.zip
