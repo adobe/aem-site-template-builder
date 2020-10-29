@@ -17,7 +17,6 @@ To build your `AEM Site Template` just go into its folder and run command:
 
 ```bash
 npx aem-site-template-builder
-ls -l site-template.zip # done
 ```
 
 ## Expected structure of the repository
@@ -44,7 +43,7 @@ package.json            Includes meta informations.
     - license
 ```
 
-## Compiled site-template.zip
+## Compiled site template artifact
 
 ```bash
 files/                  Optional, folder with the UI kit XD file and possibly other files.

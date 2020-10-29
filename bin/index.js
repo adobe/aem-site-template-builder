@@ -38,6 +38,8 @@ if (!fs.existsSync(THEME_PACKAGE_JSON_PATH)) {
   exitAndPrintError(`Failed to read ${THEME_PACKAGE_JSON_PATH}.`);
 }
 
+const siteTetmplatePackageJson = require(SITE_TEMPLATE_PACKAGE_JSON_PATH);
+
 // Check required commands in the terminal
 terminal.commandCheck('mvn');
 terminal.commandCheck('git');
@@ -86,7 +88,7 @@ shell.echo(terminal.prefix, 'Zipping Site Template package...');
 zip({
   source: `*`,
   cwd: TEMP_FOLDER_NAME,
-  destination: path.join(process.cwd(), `${PATHS.siteTemplate}.zip`)
+  destination: path.join(process.cwd(), `${siteTetmplatePackageJson.name}-${siteTetmplatePackageJson.version}.zip`)
 }).then(function() {
   shell.rm('-rf', TEMP_FOLDER_NAME);
   shell.echo(terminal.prefix, `Site Template package created! ${PATHS.siteTemplate}.zip`);
