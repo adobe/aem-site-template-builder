@@ -52,8 +52,8 @@ previews/               Folder with screenshots of the site template.
     buttons.png
     navigation.png
     teaser.png
-site-template.zip       Content package that contains the templates and policies.
-site-theme.zip          Contains compiled theme.
+site.zip       Content package that contains the templates and policies.
+theme.zip          Contains compiled theme.
 theme-sources.zip       Zipped theme sources folder.
 ```
 
