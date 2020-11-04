@@ -38,7 +38,7 @@ if (!fs.existsSync(THEME_PACKAGE_JSON_PATH)) {
   exitAndPrintError(`Failed to read ${THEME_PACKAGE_JSON_PATH}.`);
 }
 
-const siteTetmplatePackageJson = require(SITE_TEMPLATE_PACKAGE_JSON_PATH);
+const siteTemplatePackageJson = require(SITE_TEMPLATE_PACKAGE_JSON_PATH);
 
 // Check required commands in the terminal
 terminal.commandCheck('mvn');
@@ -50,7 +50,6 @@ shell.echo(terminal.prefix, 'Aem site theme builder script running...');
 // Prepare site template folder
 shell.echo(terminal.prefix, 'Preparing Site Template structure...');
 shell.rm('-rf', TEMP_FOLDER_NAME);
-shell.rm('-rf', `${PATHS.siteTemplate}.zip`);
 shell.mkdir('-p', TEMP_FOLDER_NAME);
 
 // Compile theme
@@ -63,18 +62,18 @@ shell.cd('..');
 // Copy compiled theme
 shell.echo(terminal.prefix, 'Zipping compiled theme...');
 shell.cd(`${PATHS.theme}/dist`);
-shell.exec(`zip -r ../../${TEMP_FOLDER_NAME}/site-theme.zip *`);
+shell.exec(`zip -r ../../${TEMP_FOLDER_NAME}/theme.zip *`);
 shell.cd('../..');
 
 // Build content package
 shell.echo(terminal.prefix, 'Building content package...');
-shell.cd(PATHS.template);
+shell.cd(PATHS.site);
 shell.exec('mvn clean install');
 shell.cd('..');
 
 // Copy all files into folder
 shell.cp('-r', [PATHS.files, PATHS.previews, PATHS.properties], TEMP_FOLDER_NAME);
-shell.cp('-r', `${PATHS.template}/target/*.zip`, `${TEMP_FOLDER_NAME}/site-template.zip`);
+shell.cp('-r', `${PATHS.site}/target/*.zip`, `${TEMP_FOLDER_NAME}/site.zip`);
 
 // Zip theme sources
 shell.echo(terminal.prefix, 'Zipping Theme sources...');
@@ -85,13 +84,15 @@ shell.cd('..');
 // Zip Site Template package
 shell.echo(terminal.prefix, 'Zipping Site Template package...');
 
+const siteTemplateFileName = `${siteTemplatePackageJson.name}-${siteTemplatePackageJson.version}.zip`;
+
 zip({
   source: `*`,
   cwd: TEMP_FOLDER_NAME,
-  destination: path.join(process.cwd(), `${siteTetmplatePackageJson.name}-${siteTetmplatePackageJson.version}.zip`)
+  destination: path.join(process.cwd(), siteTemplateFileName)
 }).then(function() {
   shell.rm('-rf', TEMP_FOLDER_NAME);
-  shell.echo(terminal.prefix, `Site Template package created! ${PATHS.siteTemplate}.zip`);
+  shell.echo(terminal.prefix, `Site Template package created! ${siteTemplateFileName}`);
 }).catch(function(err) {
   exitAndPrintError(`Failed to zip Site Template package: ${err.stack}`);
 });
