@@ -45,7 +45,7 @@ package.json            Includes meta informations.
 
 ## NPM scripts in your template
 
-Template Builder assumes that your AEM Site Template will contain `npm run build` npm script which will compile the theme.
+Template Builder assumes that your AEM Site Template will contain `npm run build` npm script in the `/theme` folder which will compile the theme sources into production ready compiled code available in `/theme/dist` folder.
 
 ## Compiled site template artifact
 
