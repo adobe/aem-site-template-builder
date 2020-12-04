@@ -5,7 +5,7 @@
     "private": true,
     "license": "MIT License",
     "scripts": {
-        "prod": "echo 'I build the theme.'"
+        "build": "echo 'I build the theme.'"
     },
     "devDependencies": {
         "@adobe/aem-site-template-builder": "0.1.4"

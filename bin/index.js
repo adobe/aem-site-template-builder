@@ -56,7 +56,7 @@ shell.mkdir('-p', TEMP_FOLDER_NAME);
 shell.echo(terminal.prefix, 'Compiling theme...');
 shell.cd(PATHS.theme);
 shell.exec('npm install');
-shell.exec('npm run prod');
+shell.exec('npm run build');
 shell.cd('..');
 
 // Copy compiled theme
