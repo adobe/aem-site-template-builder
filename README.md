@@ -43,6 +43,10 @@ package.json            Includes meta informations.
     - license
 ```
 
+## NPM scripts in your template
+
+Template Builder assumes that your AEM Site Template will contain `npm run build` npm script which will compile the theme.
+
 ## Compiled site template artifact
 
 ```bash
