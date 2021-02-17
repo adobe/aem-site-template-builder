@@ -91,6 +91,9 @@ zip({
   cwd: TEMP_FOLDER_NAME,
   destination: path.join(process.cwd(), siteTemplateFileName)
 }).then(function() {
+  const siteTemplateLatestName = `${siteTemplatePackageJson.name}-latest.zip`;
+  // Create additional ${siteTemplateFileName}-latest.zip file as a copy of ${siteTemplateFileName}
+  shell.cp('-r', path.join(process.cwd(), siteTemplateFileName), path.join(process.cwd(), siteTemplateLatestName));
   shell.rm('-rf', TEMP_FOLDER_NAME);
   shell.echo(terminal.prefix, `Site Template package created! ${siteTemplateFileName}`);
 }).catch(function(err) {
