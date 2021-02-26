@@ -75,6 +75,9 @@ shell.cd('..');
 shell.cp('-r', [PATHS.files, PATHS.previews, PATHS.properties], TEMP_FOLDER_NAME);
 shell.cp('-r', `${PATHS.site}/target/*.zip`, `${TEMP_FOLDER_NAME}/site.zip`);
 
+// Clear DS_Store files
+shell.exec(`find ${TEMP_FOLDER_NAME} -name ".DS_Store" -delete`);
+
 // Zip theme sources
 shell.echo(terminal.prefix, 'Zipping Theme sources...');
 shell.cd(PATHS.theme);
