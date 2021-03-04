@@ -24,6 +24,8 @@ const prerequisitsCheck = require('../lib/modules/prerequisitsCheck');
 const prepareCompiledTheme = require('../lib/modules/prepareCompiledTheme');
 const prepareThemeSources = require('../lib/modules/prepareThemeSources');
 
+const isMacOS = process.platform === 'darwin';
+
 (async () => {
   try {
     terminal.success(INFO.start);
@@ -42,8 +44,10 @@ const prepareThemeSources = require('../lib/modules/prepareThemeSources');
     shell.cp('-r', [PATHS.files, PATHS.previews, PATHS.properties], PATHS.tempFolder);
     shell.cp('-r', `${PATHS.site}/target/*.zip`, `${PATHS.tempFolder}/site.zip`);
 
-    // Clear .DS_Store files
-    await runShellExec(`find ${PATHS.tempFolder} -name ".DS_Store" -delete`);
+    if (isMacOS) {
+      // Clear .DS_Store files on Mac OS
+      await runShellExec(`find ${PATHS.tempFolder} -name '.DS_Store' -delete`);
+    }
 
     // Zip Site Template package
     terminal.info(INFO.zip_package_start);
