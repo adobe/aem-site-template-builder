@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
-Copyright 2020 Adobe
+Copyright 2021 Adobe
 All Rights Reserved.
 
 NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -9,93 +9,60 @@ accordance with the terms of the Adobe license agreement accompanying
 it.
 */
 
-const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
-const zip = require('bestzip');
-const colors = require('colors/safe');
+const AdmZip = require('adm-zip');
 
 const terminal = require('../lib/terminal');
-const PATHS = require('../lib/config').paths;
+const config = require('../lib/config');
+const { runShellExec } = require('../lib/utils');
+const { INFO } = require('../lib/i18n');
+const PATHS = config.paths;
 
-const TEMP_FOLDER_NAME = 'site-template';
-const SITE_TEMPLATE_PACKAGE_JSON_PATH = path.join(process.cwd(), 'package.json');
-const THEME_PACKAGE_JSON_PATH = path.join(process.cwd(), PATHS.theme, 'package.json');
+const buildContentPackage = require('../lib/modules/buildContentPackage');
+const prerequisitsCheck = require('../lib/modules/prerequisitsCheck');
+const prepareCompiledTheme = require('../lib/modules/prepareCompiledTheme');
+const prepareThemeSources = require('../lib/modules/prepareThemeSources');
 
-const exitAndPrintError = (message) => {
-  shell.echo(colors.error(`[${terminal.packageName}]: ${message}`));
-  shell.echo(colors.error(`[${terminal.packageName}]: Docs about expected structure of the repo: https://github.com/adobe/aem-site-template-builder#expected-structure-of-the-repository`));
-  process.exit(1);
-};
+(async () => {
+  try {
+    terminal.success(INFO.start);
 
-// Check required package.json in site template root
-if (!fs.existsSync(SITE_TEMPLATE_PACKAGE_JSON_PATH)) {
-  exitAndPrintError(`Failed to read ${SITE_TEMPLATE_PACKAGE_JSON_PATH}.`);
-}
+    await prerequisitsCheck();
 
-// Check required package.json in site theme root
-if (!fs.existsSync(THEME_PACKAGE_JSON_PATH)) {
-  exitAndPrintError(`Failed to read ${THEME_PACKAGE_JSON_PATH}.`);
-}
+    // Prepare site template temp folder
+    shell.rm('-rf', PATHS.tempFolder);
+    shell.mkdir('-p', PATHS.tempFolder);
 
-const siteTemplatePackageJson = require(SITE_TEMPLATE_PACKAGE_JSON_PATH);
+    await prepareCompiledTheme();
+    await prepareThemeSources();
+    await buildContentPackage();
 
-// Check required commands in the terminal
-terminal.commandCheck('mvn');
-terminal.commandCheck('git');
-terminal.commandCheck('zip');
+    // Copy all part of the Site Template into temp folder
+    shell.cp('-r', [PATHS.files, PATHS.previews, PATHS.properties], PATHS.tempFolder);
+    shell.cp('-r', `${PATHS.site}/target/*.zip`, `${PATHS.tempFolder}/site.zip`);
 
-shell.echo(terminal.prefix, 'Aem site theme builder script running...');
+    // Clear .DS_Store files
+    await runShellExec(`find ${PATHS.tempFolder} -name ".DS_Store" -delete`);
 
-// Prepare site template folder
-shell.echo(terminal.prefix, 'Preparing Site Template structure...');
-shell.rm('-rf', TEMP_FOLDER_NAME);
-shell.mkdir('-p', TEMP_FOLDER_NAME);
+    // Zip Site Template package
+    terminal.info(INFO.zip_package_start);
 
-// Compile theme
-shell.echo(terminal.prefix, 'Compiling theme...');
-shell.cd(PATHS.theme);
-shell.exec('npm install');
-shell.exec('npm run build');
-shell.cd('..');
+    const { name, version } = require(PATHS.packageJson);
+    const siteTemplateFilePath = path.join(PATHS.root, `${name}-${version}.zip`);
+    const siteTemplateLatestPath = path.join(PATHS.root, `${name}-latest.zip`);
+    const siteTemplateZip = new AdmZip();
 
-// Copy compiled theme
-shell.echo(terminal.prefix, 'Zipping compiled theme...');
-shell.cd(`${PATHS.theme}/dist`);
-shell.exec(`zip -r ../../${TEMP_FOLDER_NAME}/theme.zip *`);
-shell.cd('../..');
+    siteTemplateZip.addLocalFolder(PATHS.tempFolder);
+    siteTemplateZip.writeZip(siteTemplateFilePath);
 
-// Build content package
-shell.echo(terminal.prefix, 'Building content package...');
-shell.cd(PATHS.site);
-shell.exec('mvn clean install');
-shell.cd('..');
+    shell.cp('-r', siteTemplateFilePath, siteTemplateLatestPath);
 
-// Copy all files into folder
-shell.cp('-r', [PATHS.files, PATHS.previews, PATHS.properties], TEMP_FOLDER_NAME);
-shell.cp('-r', `${PATHS.site}/target/*.zip`, `${TEMP_FOLDER_NAME}/site.zip`);
+    shell.rm('-rf', PATHS.tempFolder);
 
-// Zip theme sources
-shell.echo(terminal.prefix, 'Zipping Theme sources...');
-shell.cd(PATHS.theme);
-shell.exec(`zip ../${TEMP_FOLDER_NAME}/theme-sources.zip $(git ls-files)`);
-shell.cd('..');
-
-// Zip Site Template package
-shell.echo(terminal.prefix, 'Zipping Site Template package...');
-
-const siteTemplateFileName = `${siteTemplatePackageJson.name}-${siteTemplatePackageJson.version}.zip`;
-
-zip({
-  source: `*`,
-  cwd: TEMP_FOLDER_NAME,
-  destination: path.join(process.cwd(), siteTemplateFileName)
-}).then(function() {
-  const siteTemplateLatestName = `${siteTemplatePackageJson.name}-latest.zip`;
-  // Create additional ${siteTemplateFileName}-latest.zip file as a copy of ${siteTemplateFileName}
-  shell.cp('-r', path.join(process.cwd(), siteTemplateFileName), path.join(process.cwd(), siteTemplateLatestName));
-  shell.rm('-rf', TEMP_FOLDER_NAME);
-  shell.echo(terminal.prefix, `Site Template package created! ${siteTemplateFileName}`);
-}).catch(function(err) {
-  exitAndPrintError(`Failed to zip Site Template package: ${err.stack}`);
-});
+    terminal.success(`${INFO.zip_package_end} ${siteTemplateFilePath}`);
+  } catch (error) {
+    console.log(error);
+    terminal.error(error);
+  }
+})();
