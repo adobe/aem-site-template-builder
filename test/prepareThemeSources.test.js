@@ -19,6 +19,8 @@ const TEST_TEMPLATE_FOLDER_PATH = path.join(ROOT_PATH, 'test/resources/some-site
 const THEME_SOURCES_FOLDER_PATH = path.join(TEST_TEMPLATE_FOLDER_PATH, 'site-template/theme-sources.zip');
 const THEME_SOURCES_FOLDER_WRONG_PATH = path.resolve(ROOT_PATH, '../');
 
+process.on('exit', () => process.exit(0));
+
 test.beforeEach(t => {
   shell.cd(ROOT_PATH);
 });

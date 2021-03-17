@@ -11,6 +11,8 @@ const test = require('ava');
 
 const terminal = require('../lib/terminal');
 
+process.on('exit', () => process.exit(0));
+
 test('test terminal error without ending process', async t => {
   terminal.error('test error - do not end process', false);
 

@@ -11,6 +11,11 @@ const test = require('ava');
 
 const { runShellCd } = require('../lib/utils');
 
+process.on('exit', () => {
+  console.log('on EXIT');
+  process.exit(0);
+});
+
 test('test runShellCd on folder that does not exist', async t => {
   runShellCd('/this-folder-does-not-exist');
 

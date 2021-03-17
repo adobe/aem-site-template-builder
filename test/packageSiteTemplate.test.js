@@ -19,6 +19,8 @@ const ROOT_PATH = process.cwd();
 const TEST_TEMPLATE_FOLDER_PATH = path.join(ROOT_PATH, 'test/resources/some-site-template');
 const INCORRECT_TEMPLATE_FOLDER_PATH = path.join(ROOT_PATH, 'test/resources/incorrect-site-template');
 
+process.on('exit', () => process.exit(0));
+
 test.beforeEach(t => {
   shell.cd(ROOT_PATH);
 });

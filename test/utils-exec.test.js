@@ -11,6 +11,8 @@ const test = require('ava');
 
 const { runShellExec } = require('../lib/utils');
 
+process.on('exit', () => process.exit(0));
+
 test('test runShellExec on command that does not exist', async t => {
   await runShellExec('this-command-does-not-exist');
 
