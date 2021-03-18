@@ -1,0 +1,13 @@
+{
+    "name": "incorrect-site-theme",
+    "version": "1.0.0",
+    "description": "Incorrect Site Theme",
+    "private": true,
+    "license": "MIT License",
+    "scripts": {
+        "build": "echo 'I build the theme.'"
+    },
+    "devDependencies": {
+        "@adobe/aem-site-template-builder": "0.1.4"
+    }
+}
