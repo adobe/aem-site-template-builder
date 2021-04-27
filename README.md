@@ -4,7 +4,7 @@ This repository contains scripts for building `AEM Site Templates`.
 
 ## Installation
 
-Required dependencies: `node`, `mvn`, `git`, `zip`
+Required dependencies: `node`, `mvn`, `git`
 
 ```bash
 cd your-aem-site-template
