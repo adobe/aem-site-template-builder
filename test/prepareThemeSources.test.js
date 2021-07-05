@@ -17,7 +17,7 @@ const prepareThemeSources = require('../lib/modules/prepareThemeSources');
 const ROOT_PATH = process.cwd();
 const TEST_TEMPLATE_FOLDER_PATH = path.join(ROOT_PATH, 'test/resources/some-site-template');
 const THEME_SOURCES_FOLDER_PATH = path.join(TEST_TEMPLATE_FOLDER_PATH, 'site-template/theme-sources.zip');
-const THEME_SOURCES_FOLDER_WRONG_PATH = path.resolve(ROOT_PATH, '../');
+const THEME_SOURCES_FOLDER_WRONG_PATH = path.resolve(ROOT_PATH, 'test/resources/incorrect-site-template');
 
 process.on('exit', () => process.exit(0));
 
@@ -32,7 +32,7 @@ test('prepare theme sources', async t => {
   t.true(fs.existsSync(THEME_SOURCES_FOLDER_PATH));
 });
 
-test('fail if theme sources are not a proper repo folder', async t => {
+test('fail if theme sources are not available in site template', async t => {
   shell.cd(TEST_TEMPLATE_FOLDER_PATH);
   await prepareThemeSources({ rootPath: THEME_SOURCES_FOLDER_WRONG_PATH });
 
