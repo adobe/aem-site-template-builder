@@ -14,8 +14,8 @@
   "dependencies": {
     "adm-zip": "^0.5.3",
     "colors": "1.4.0",
-    "shelljs": "0.8.4",
-    "simple-git": "^2.36.0"
+    "ignore-walk": "^3.0.4",
+    "shelljs": "0.8.4"
   },
   "devDependencies": {
     "ava": "3.13.0",

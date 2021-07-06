@@ -6,13 +6,3 @@ node_modules
 
 # resources created during test run
 .nyc_output
-test/resources/incorrect-site-template/incorrect-site-template-1.0.0.zip
-test/resources/incorrect-site-template/incorrect-site-template-latest.zip
-test/resources/incorrect-site-template/site-template
-test/resources/incorrect-site-template/site/target
-test/resources/incorrect-site-template/theme/package-lock.json
-test/resources/some-site-template/some-site-template-1.0.0.zip
-test/resources/some-site-template/some-site-template-latest.zip
-test/resources/some-site-template/site-template
-test/resources/some-site-template/site/target
-test/resources/some-site-template/theme/package-lock.json
