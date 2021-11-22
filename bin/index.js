@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
-Copyright 2021 Adobe
+Copyright 2020 Adobe
 All Rights Reserved.
 
 NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -10,7 +10,16 @@ it.
 */
 
 const packageSiteTemplate = require('../lib/modules/packageSiteTemplate');
+const yargs = require('yargs');
 
-(async () => {
-  await packageSiteTemplate({ rootPath: process.cwd() });
-})();
+const cmd = yargs
+  .scriptName('aem-site-template-builder')
+  .command(['serve', '$0'], 'build', () => {}, async function () {
+    await packageSiteTemplate({ rootPath: process.cwd() });
+  })
+  .command('stub', 'stub', () => {}, async function () {
+    await packageSiteTemplate({ rootPath: process.cwd(), stub: true });
+    // packageStub({ rootPath: process.cwd() });
+  })
+  // .help()
+  .argv;
