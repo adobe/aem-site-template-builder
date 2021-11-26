@@ -27,10 +27,17 @@ test.beforeEach(t => {
 
 test('package Site Template', async t => {
   shell.cd(TEST_TEMPLATE_FOLDER_PATH);
-  await packageSiteTemplate();
+  await packageSiteTemplate({ rootPath: TEST_TEMPLATE_FOLDER_PATH });
 
   t.true(fs.existsSync(path.join(TEST_TEMPLATE_FOLDER_PATH, 'some-site-template-latest.zip')));
   t.true(fs.existsSync(path.join(TEST_TEMPLATE_FOLDER_PATH, 'some-site-template-1.0.0.zip')));
+});
+
+test('package Site Template stub', async t => {
+  shell.cd(TEST_TEMPLATE_FOLDER_PATH);
+  await packageSiteTemplate({ stub: true });
+
+  t.true(fs.existsSync(path.join(TEST_TEMPLATE_FOLDER_PATH, 'some-site-template-1.0.0-stub.zip')));
 });
 
 test('package Site Template with rootPath', async t => {
@@ -56,9 +63,29 @@ test('compare structure of created package with pattern zip file', async t => {
   t.true(JSON.stringify(siteTemplateFiles) === JSON.stringify(patternTemplateFiles));
 });
 
+test('compare structure of created stub package with pattern zip file', async t => {
+  shell.cd(TEST_TEMPLATE_FOLDER_PATH);
+  const siteTemplateZip = new AdmZip('some-site-template-1.0.0-stub.zip');
+  const patternTemplateZip = new AdmZip('some-site-template-stub-pattern.zip');
+
+  const siteTemplateFiles = siteTemplateZip.getEntries().map(({ entryName }) => entryName);
+  const patternTemplateFiles = patternTemplateZip.getEntries().map(({ entryName }) => entryName);
+
+  t.true(JSON.stringify(siteTemplateFiles) === JSON.stringify(patternTemplateFiles));
+});
+
 test('packaging Site Template fails for incorrect Site Template', async t => {
   shell.cd(INCORRECT_TEMPLATE_FOLDER_PATH);
   await packageSiteTemplate({ rootPath: INCORRECT_TEMPLATE_FOLDER_PATH });
 
-  t.true(!fs.existsSync(path.join(TEST_TEMPLATE_FOLDER_PATH, 'some-site-template-latest.zip')));
+  // No errors thrown - process still going
+  t.true(false);
+});
+
+test('packaging Site Template stub fails for incorrect Site Template', async t => {
+  shell.cd(INCORRECT_TEMPLATE_FOLDER_PATH);
+  await packageSiteTemplate({ rootPath: INCORRECT_TEMPLATE_FOLDER_PATH, stub: true });
+
+  // No errors thrown - process still going
+  t.true(false);
 });
