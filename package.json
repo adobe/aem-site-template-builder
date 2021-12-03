@@ -3,7 +3,11 @@
   "version": "2.2.1",
   "description": "",
   "author": "",
-  "license": "MIT License, Copyright 2020 Adobe Systems Incorporated",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adobe/aem-site-template-builder"
+  },
+  "license": "MIT",
   "main": "bin/index.js",
   "bin": {
     "aem-site-template-builder": "./bin/index.js"
@@ -28,9 +32,9 @@
     "nyc": "15.1.0"
   },
   "ava": {
-		"files": [
-			"test/**/*",
-			"!test/resources"
-		]
+    "files": [
+      "test/**/*",
+      "!test/resources"
+    ]
   }
 }

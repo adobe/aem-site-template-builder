@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
-Copyright 2020 Adobe
+Copyright 2021 Adobe
 All Rights Reserved.
 
 NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -19,7 +19,6 @@ const cmd = yargs
   })
   .command('stub', 'stub', () => {}, async function () {
     await packageSiteTemplate({ rootPath: process.cwd(), stub: true });
-    // packageStub({ rootPath: process.cwd() });
   })
-  // .help()
+  .help()
   .argv;
