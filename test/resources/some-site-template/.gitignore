@@ -5,6 +5,7 @@ node_modules
 .DS_Store
 
 some-site-template-1.0.0.zip
+some-site-template-1.0.0-stub.zip
 some-site-template-latest.zip
 site-template
 site/target

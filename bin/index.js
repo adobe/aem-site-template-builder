@@ -10,7 +10,15 @@ it.
 */
 
 const packageSiteTemplate = require('../lib/modules/packageSiteTemplate');
+const yargs = require('yargs');
 
-(async () => {
-  await packageSiteTemplate({ rootPath: process.cwd() });
-})();
+const cmd = yargs
+  .scriptName('aem-site-template-builder')
+  .command(['serve', '$0'], 'build', () => {}, async function () {
+    await packageSiteTemplate({ rootPath: process.cwd() });
+  })
+  .command('stub', 'stub', () => {}, async function () {
+    await packageSiteTemplate({ rootPath: process.cwd(), stub: true });
+  })
+  .help()
+  .argv;

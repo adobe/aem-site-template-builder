@@ -1,0 +1,1 @@
+# Site Template Stub Theme
