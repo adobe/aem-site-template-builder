@@ -29,7 +29,7 @@ previews/               Folder with screenshots of the site template.
     navigation.png
     teaser.png
 site/                   Content module that contains the templates and policies.
-theme/                  Theme sources (CSS, JS). It's a npm package with dev-dependency to aem-site-theme-builder.
+theme/                  Optional, theme sources (CSS, JS). It's a npm package with dev-dependency to aem-site-theme-builder.
 package.json            Includes meta informations.
     - version           The version of the Site Template.
     - name              Unique name to help AEM to only contain a Site Template once.
@@ -57,8 +57,8 @@ previews/               Folder with screenshots of the site template.
     navigation.png
     teaser.png
 site.zip                Content package that contains the templates and policies.
-theme.zip               Contains compiled theme.
-theme-sources.zip       Zipped theme sources folder.
+theme.zip               Optional, contains compiled theme.
+theme-sources.zip       Optional, zipped theme sources folder.
 ```
 
 ## Local development

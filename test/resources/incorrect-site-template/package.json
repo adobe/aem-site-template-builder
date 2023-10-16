@@ -1,8 +1,0 @@
-{
-  "name": "incorrect-site-template",
-  "version": "1.0.0",
-  "description": "Incorrect Site Template",
-  "private": true,
-  "license": "MIT License",
-  "devDependencies": {}
-}
